@@ -16,7 +16,7 @@
         datacenter: "Datacenter"
         host: "10.75.255.214"
         guestinfo_vars:
-          - hostname: "{{ guestinfo.ic.hostname }}"
+          - hostname: "{{ guestinfo.hostname }}"
         name: "Instant_clone_guest_customize"
         parent_vm: "Ubuntu-Server-Template"
       register: Instant_cloned_guest_customize
