@@ -6,6 +6,7 @@
     pip_package_requirements:
       - "requests"
       - "pyVim"
+      - "pyVmomi"
   tasks:
     - name: Install pip requests library
       pip:
