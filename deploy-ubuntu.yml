@@ -5,6 +5,7 @@
   vars:
     pip_package_requirements:
       - "requests"
+      - "pyVim"
   tasks:
     - name: Install pip requests library
       pip:
