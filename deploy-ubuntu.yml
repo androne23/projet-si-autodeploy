@@ -1,6 +1,7 @@
 ---
 - name: Deploy Ubuntu
-  hosts: all
+  hosts: localhost
+  gather_facts: no
   tasks:
     - name: Instant Clone a VM with guest_customization
       community.vmware.vmware_guest_instant_clone:

@@ -1,6 +1,7 @@
 ---
 - name: Deploy Windows
-  hosts: all
+  hosts: localhost
+  gather_facts: no
   tasks:
     - name: Clone a virtual machine from Windows template and customize
       community.vmware.vmware_guest:
