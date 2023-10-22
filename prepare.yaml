@@ -1,0 +1,13 @@
+---
+- hosts: localhost
+  connection: local
+  gather_facts: no
+  vars:
+    pip_package_requirements:
+      - "requests"
+  tasks:
+    - name: Install pip requests library
+      pip:
+        name: "{{ item }}"
+        state: present
+      with_items: "{{ pip_package_requirements }}"
