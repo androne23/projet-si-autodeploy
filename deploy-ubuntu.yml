@@ -1,9 +1,9 @@
 ---
+- import_playbook: requirements.yaml
 - name: Deploy Ubuntu
   hosts: localhost
   gather_facts: no
   tasks:
-    - import_playbook: requirements.yaml
     - name: Instant Clone a VM with guest_customization
       community.vmware.vmware_guest_instant_clone:
         hostname: "{{ vcenter_hostname }}"
