@@ -11,7 +11,7 @@
         vm_username: "ubuntu"
         vm_password: "Test1234$"
         validate_certs: false
-        folder: "{{ f0 }}"
+        folder: "{{  }}"
         datastore: "{{ rw_datastore }}"
         datacenter: "{{ dc1 }}"
         host: "{{ esxi1 }}"
