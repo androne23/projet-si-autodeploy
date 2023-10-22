@@ -1,0 +1,17 @@
+- name: Virutal Machine - Snapshot, Shutdown, Upgrade Hardware, verify, Power on
+  hosts: localhost
+  gather_facts: no
+
+  tasks:
+    - name: Gather all registered virtual machines
+      community.vmware.vmware_vm_info:
+        hostname: '{{ secret.hostname }}'
+        username: '{{ secret.username }}'
+        password: '{{ secret.password }}'
+        vm_type: vm
+        validate_certs: no
+      delegate_to: localhost
+      register: vminfo
+
+    - debug:
+        var: vminfo
