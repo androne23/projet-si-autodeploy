@@ -1,9 +1,16 @@
 ---
-- import_playbook: "/home/ubuntu/prepare.yaml"
 - name: Deploy Ubuntu
   hosts: localhost
   gather_facts: no
+  vars:
+    pip_package_requirements:
+      - "requests"
   tasks:
+    - name: Install pip requests library
+      pip:
+          name: "{{ item }}"
+          state: present
+      with_items: "{{ pip_package_requirements }}"
     - name: Instant Clone a VM with guest_customization
       community.vmware.vmware_guest_instant_clone:
         hostname: "{{ vcenter_hostname }}"
