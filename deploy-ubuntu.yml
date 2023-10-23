@@ -27,6 +27,6 @@
         guestinfo_vars:
           - hostname: "{{ guestinfo.hostname }}"
         name: "Instant_clone_guest_customize"
-        parent_vm: "Ubuntu-2"
+        parent_vm: "Ubuntu-Server-Template"
       register: Instant_cloned_guest_customize
       delegate_to: localhost
