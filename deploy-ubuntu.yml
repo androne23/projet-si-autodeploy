@@ -13,6 +13,7 @@
         hostname: "{{ vcenter_hostname }}"
         username: "{{ vcenter_username }}"
         password: "{{ vcenter_password }}"
+        validate_certs: false
         datastore: "datastore1 (ESXI2)"
         datacenter: "Datacenter"
         state: present
