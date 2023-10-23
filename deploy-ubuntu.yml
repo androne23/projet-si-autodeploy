@@ -8,25 +8,24 @@
       - "pyVim"
       - "pyVmomi"
   tasks:
-    - name: Install pip requests library
-      pip:
-          name: "{{ item }}"
-          state: present
-      with_items: "{{ pip_package_requirements }}"
-    - name: Instant Clone a VM with guest_customization
-      community.vmware.vmware_guest_instant_clone:
+    - name: Clone a virtual machine from Linux template and customize
+      community.vmware.vmware_guest:
         hostname: "{{ vcenter_hostname }}"
         username: "{{ vcenter_username }}"
         password: "{{ vcenter_password }}"
-        vm_username: "ubuntu"
-        vm_password: "Test1234$"
-        validate_certs: false
-        datastore: "datastore1 (ESXI2)"
-        datacenter: "Datacenter"
-        host: "10.75.255.214"
-        guestinfo_vars:
-          - hostname: "{{ guestinfo.hostname }}"
-        name: "Instant_clone_guest_customize"
-        parent_vm: "Ubuntu-Server-Template"
-      register: Instant_cloned_guest_customize
+        datacenter: "{{ datacenter }}"
+        state: present
+        template: "Ubuntu-Desktop-Template"
+        name: "{{ vm_name }}"
+        networks:
+          - name: "DPortGroup 1"
+            type: dhcp
+        wait_for_ip_address: true
+        customization:
+          domain: "projet-si.local"
+          dns_servers:
+            - 10.0.0.10
+          script_text: |
+            #!/bin/bash
+            touch /tmp/touch-from-playbook
       delegate_to: localhost
