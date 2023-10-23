@@ -27,7 +27,7 @@
         wait_for_ip_address: true
         wait_for_customization: true
         customization:
-          domain: "projet-si.local"
+          domain: "projet.si"
           dns_servers:
             - 10.0.0.10
           script_text: |  
