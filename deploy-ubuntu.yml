@@ -22,7 +22,6 @@
       delegate_to: localhost
       register: vminfo
     - debug:
-        var:
         msg: |
           [
             "vminfo length: {{ vminfo.virtual_machines | length }}",
