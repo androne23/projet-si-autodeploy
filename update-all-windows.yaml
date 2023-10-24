@@ -4,6 +4,7 @@
   gather_facts: no
   vars:
     pip_package_requirements:
+      - "pywinrm"
   tasks:
     - name: Install pip requests library
       pip:
