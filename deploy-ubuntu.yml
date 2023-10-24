@@ -8,6 +8,25 @@
       - "pyVim"
       - "pyVmomi"
   tasks:
+    - name: Install pip requests library
+      pip:
+        name: "{{ item }}"
+        state: present
+      with_items: "{{ pip_package_requirements }}"
+    - name: Gather all registered virtual machines
+      vmware_vm_info:
+        hostname: '{{ vcenter_hostname }}'
+        username: '{{ vcenter_username }}'
+        password: '{{ vcenter_password }}'
+      delegate_to: localhost
+      register: vminfo
+    - debug:
+        var:
+        msg: |
+          [
+            "vminfo length: {{ vminfo.virtual_machines | length }}",
+            "vminfo: {{ vminfo.virtual_machines }}",
+          ]
     - name: Clone a virtual machine from Linux template and customize
       community.vmware.vmware_guest:
         hostname: "{{ vcenter_hostname }}"
