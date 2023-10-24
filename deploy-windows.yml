@@ -12,6 +12,7 @@
       pip:
         name: "{{ item }}"
         state: present
+        delegate_to: localhost
       with_items: "{{ pip_package_requirements }}"
     - name: Gather all registered virtual machines
       vmware_vm_info:
