@@ -38,7 +38,7 @@
         datacenter: "Datacenter"
         state: present
         template: "Ubuntu-Desktop-Template"
-        name: "{{ vm_name }}"
+        name: "Client_{{ vminfo.virtual_machines | length }}"
         networks:
           - name: "DPortGroup 1"
             start_connected: True
