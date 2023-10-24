@@ -22,7 +22,7 @@
         name: "{{ vm_name }}"
         networks:
           - name: "DPortGroup 1"
-
+            start_connected: True
             type: dhcp
         wait_for_ip_address: true
         wait_for_customization: true
@@ -33,4 +33,6 @@
           script_text: |  
             #!/bin/bash
             touch /tmp/touch-from-playbook
+            echo "Hostname=$HOSTNAME" >> /etc/zabbix/zabbix_agentd.conf
+            sudo systemctl restart zabbix-agent
       delegate_to: localhost
