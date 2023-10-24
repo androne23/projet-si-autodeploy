@@ -22,7 +22,7 @@
       delegate_to: localhost
       register: vminfo
     - debug:
-        vmNBR: {{ vminfo.virtual_machines | length }}
+        vmNBR: "{{ vminfo.virtual_machines | length }}"
         msg: |
           [
             "vminfo length: {{ vmNBR + 1 }}",
@@ -39,7 +39,7 @@
         datacenter: "Datacenter"
         state: present
         template: "Ubuntu-Desktop-Template"
-        name: "Client_{{ vminfo.virtual_machines | length }}"
+        name: "Client_{{ vmNBR + 1 }}"
         networks:
           - name: "DPortGroup 1"
             start_connected: True
