@@ -21,11 +21,13 @@
         validate_certs: false
       delegate_to: localhost
       register: vminfo
+    - name: Generate id for the new clone
+      ansible.builtin.set_fact:
+        clone_id: "{{ vminfo.virtual_machines | length }}"
     - debug:
-        vmNBR: "{{ vminfo.virtual_machines | length }}"
         msg: |
           [
-            "vminfo length: {{ vmNBR + 1 }}",
+            "vminfo length: {{ clone_id + 1 }}",
             "vminfo: {{ vminfo.virtual_machines }}",
           ]
         register: vmNBR
@@ -40,8 +42,7 @@
         datacenter: "Datacenter"
         state: present
         template: "Ubuntu-Desktop-Template"
-        vmNBR: "{{ vminfo.virtual_machines | length }}"
-        name: "Client_{{ vmNBR + 1 }}"
+        name: "Client_{{ clone_id + 1 }}"
         networks:
           - name: "DPortGroup 1"
             start_connected: True
