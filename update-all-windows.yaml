@@ -7,6 +7,7 @@
       - "pywinrm"
   tasks:
     - name: Install pip requests library
+      delegate_to: localhost
       pip:
         name: "{{ item }}"
         state: present
