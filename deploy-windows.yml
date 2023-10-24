@@ -2,35 +2,52 @@
 - name: Deploy Windows
   hosts: localhost
   gather_facts: no
+  vars:
+    pip_package_requirements:
+      - "requests"
+      - "pyVim"
+      - "pyVmomi"
   tasks:
+    - name: Install pip requests library
+      pip:
+        name: "{{ item }}"
+        state: present
+      with_items: "{{ pip_package_requirements }}"
+    - name: Gather all registered virtual machines
+      vmware_vm_info:
+        hostname: '{{ vcenter_hostname }}'
+        username: '{{ vcenter_username }}'
+        password: '{{ vcenter_password }}'
+        validate_certs: false
+      delegate_to: localhost
+      register: vminfo
+    - debug:
+        msg: |
+          [
+            "vminfo length: {{ vminfo.virtual_machines | length + 1 }}",
+          ]
     - name: Clone a virtual machine from Windows template and customize
       community.vmware.vmware_guest:
         hostname: "{{ vcenter_hostname }}"
         username: "{{ vcenter_username }}"
         password: "{{ vcenter_password }}"
-        datacenter: datacenter1
-        cluster: cluster
-        name: testvm-2
-        template: template_windows
+        validate_certs: false
+        folder: "/"
+        cluster: "Nouveau cluster"
+        datacenter: "Datacenter"
+        state: present
+        template: "Ubuntu-Desktop-Template"
+        name: "Client{{ vminfo.virtual_machines | length + 1 }}"
         networks:
-        - name: VM Network
-          ip: 192.168.1.100
-          netmask: 255.255.255.0
-          gateway: 192.168.1.1
-          mac: aa:bb:dd:aa:00:14
-          domain: my_domain
-          dns_servers:
-          - 192.168.1.1
-          - 192.168.1.2
-        - vlan: 1234
-          type: dhcp
+          - name: "DPortGroup 1"
+            start_connected: True
+            type: dhcp
+        wait_for_ip_address: true
+        wait_for_customization: true
         customization:
-          autologon: true
+          domain: "projet.si"
           dns_servers:
-          - 192.168.1.1
-          - 192.168.1.2
-          domain: my_domain
-          password: new_vm_password
+            - 10.0.0.10
           runonce:
-          - powershell.exe -ExecutionPolicy Unrestricted -File C:\Windows\Temp\ConfigureRemotingForAnsible.ps1 -ForceNewSSLCert -EnableCredSSP
+          - powershell.exe -ExecutionPolicy Unrestricted -File C:\Users\user\Desktop\installer.ps1 -ForceNewSSLCert -EnableCredSSP
       delegate_to: localhost

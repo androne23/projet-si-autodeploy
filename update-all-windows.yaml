@@ -1,0 +1,16 @@
+---
+- name: Update all Windows
+  hosts: Windows
+  gather_facts: no
+  vars:
+    pip_package_requirements:
+  tasks:
+    - name: Install pip requests library
+      pip:
+        name: "{{ item }}"
+        state: present
+      with_items: "{{ pip_package_requirements }}"
+    - name: Install all updates and reboot as many times as needed
+      ansible.windows.win_updates:
+        category_names: '*
+        reboot: yes'
