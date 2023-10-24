@@ -23,7 +23,7 @@
       register: vminfo
     - name: Generate id for the new clone
       ansible.builtin.set_fact:
-        clone_id: "{{ vminfo.virtual_machines | length }}"
+        clone_id: "{{ vminfo.virtual_machines | length | string }}"
     - debug:
         msg: |
           [
