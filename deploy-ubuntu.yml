@@ -30,7 +30,6 @@
             "vminfo length: {{ vminfo.virtual_machines | length + 1 }}",
             "vminfo: {{ vminfo.virtual_machines }}",
           ]
-        register: vmNBR
     - name: Clone a virtual machine from Linux template and customize
       community.vmware.vmware_guest:
         hostname: "{{ vcenter_hostname }}"
