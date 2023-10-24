@@ -40,6 +40,7 @@
         datacenter: "Datacenter"
         state: present
         template: "Ubuntu-Desktop-Template"
+        vmNBR: "{{ vminfo.virtual_machines | length }}"
         name: "Client_{{ vmNBR + 1 }}"
         networks:
           - name: "DPortGroup 1"
