@@ -22,9 +22,10 @@
       delegate_to: localhost
       register: vminfo
     - debug:
+        vmNBR: {{ vminfo.virtual_machines | length }}
         msg: |
           [
-            "vminfo length: {{ vminfo.virtual_machines | length }}",
+            "vminfo length: {{ vmNBR + 1 }}",
             "vminfo: {{ vminfo.virtual_machines }}",
           ]
     - name: Clone a virtual machine from Linux template and customize
