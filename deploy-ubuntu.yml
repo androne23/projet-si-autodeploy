@@ -27,7 +27,7 @@
     - debug:
         msg: |
           [
-            "vminfo length: {{ clone_id + 1 }}",
+            "vminfo length: {{ vminfo.virtual_machines | length + 1 }}",
             "vminfo: {{ vminfo.virtual_machines }}",
           ]
         register: vmNBR
