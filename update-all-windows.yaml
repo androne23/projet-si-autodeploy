@@ -4,6 +4,9 @@
   gather_facts: no
   vars:
     pip_package_requirements:
+      - "requests"
+      - "pyVim"
+      - "pyVmomi"
       - "pywinrm"
   tasks:
     - name: Install pip requests library
