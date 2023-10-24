@@ -1,6 +1,6 @@
 ---
 - name: Update all Windows
-  hosts: Windows
+  hosts: all
   gather_facts: no
   vars:
     pip_package_requirements:
