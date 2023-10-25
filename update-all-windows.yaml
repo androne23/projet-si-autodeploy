@@ -12,7 +12,5 @@
         state: present
       with_items: "{{ pip_package_requirements }}"
     - name: Install all updates and reboot as many times as needed
+      ansible.buildin.command: /usr/bin/sshpass -p Test1324$ ssh administrator@10.0.0.37 'Import-Module PSWindowsUpdate | Get-WindowsUpdate'
       delegate_to: localhost
-      shell: |
-        "echo azer"
-      register: os_info
