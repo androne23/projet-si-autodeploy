@@ -2,6 +2,7 @@
 - name: Update all Windows
   hosts: localhost
   gather_facts: no
+  become: yes
   vars:
     pip_package_requirements:
   tasks:
@@ -12,5 +13,5 @@
         state: present
       with_items: "{{ pip_package_requirements }}"
     - name: Install all updates and reboot as many times as needed
-      ansible.builtin.command: sshpass -p Test1324$ ssh administrator@10.0.0.37 'echo azer'
+      ansible.builtin.command: sudo sshpass -p Test1324$ ssh administrator@10.0.0.37 'echo azer'
       delegate_to: localhost
