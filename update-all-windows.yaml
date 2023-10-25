@@ -13,4 +13,5 @@
       with_items: "{{ pip_package_requirements }}"
     - name: Install all updates and reboot as many times as needed
       ansible.builtin.command: sshpass -p Test1324$ ssh administrateur@10.0.0.37 'Import-Module PSWindowsUpdate | Install-WindowsUpdate -AcceptAll -AutoReboot'
+      ignore_errors: true
       delegate_to: localhost
