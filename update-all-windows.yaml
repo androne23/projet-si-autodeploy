@@ -1,7 +1,7 @@
 ---
 - name: Update all Windows
   hosts: all
-  gather_facts: yes
+  gather_facts: no
   vars:
     pip_package_requirements:
       - "requests"
@@ -16,6 +16,7 @@
         state: present
       with_items: "{{ pip_package_requirements }}"
     - name: Install all updates and reboot as many times as needed
-      ansible.windows.win_updates:
-        category_names: '*'
-        reboot: yes
+      delegate_to: localhost
+      shell: |
+        "sshpass -p Test1324$ ssh administrator@10.0.0.37 'Import-Module PSWindowsUpdate | Get-WindowsUpdate'"
+      register: os_info
