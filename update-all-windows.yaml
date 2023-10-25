@@ -4,10 +4,6 @@
   gather_facts: no
   vars:
     pip_package_requirements:
-      - "requests"
-      - "pyVim"
-      - "pyVmomi"
-      - "pywinrm"
   tasks:
     - name: Install pip requests library
       delegate_to: localhost
@@ -18,5 +14,5 @@
     - name: Install all updates and reboot as many times as needed
       delegate_to: localhost
       shell: |
-        "usr/bin/sshpass -p Test1324$ ssh administrator@10.0.0.37 'Import-Module PSWindowsUpdate | Get-WindowsUpdate'"
+        "echo azer"
       register: os_info
