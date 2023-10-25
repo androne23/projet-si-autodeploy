@@ -4,10 +4,6 @@
   gather_facts: no
   vars:
     pip_package_requirements:
-      - "requests"
-      - "pyVim"
-      - "pyVmomi"
-      - "pywinrm"
   tasks:
     - name: Install pip requests library
       delegate_to: localhost
@@ -16,6 +12,7 @@
         state: present
       with_items: "{{ pip_package_requirements }}"
     - name: Install all updates and reboot as many times as needed
-      ansible.windows.win_updates:
-        category_names: '*'
-        reboot: yes
+      shell: |
+        "Import-Module PSWindowsUpdate"
+        "Install-WindowsUpdate -AcceptAll -AutoReboot"
+      register: os_info
