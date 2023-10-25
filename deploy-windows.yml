@@ -35,7 +35,7 @@
         password: "{{ vcenter_password }}"
         validate_certs: false
         folder: "/"
-        cluster: "Nouveau cluster 1"
+        cluster: "Nouveau cluster"
         datacenter: "Datacenter"
         state: present
         template: "Windows-11-Template "
