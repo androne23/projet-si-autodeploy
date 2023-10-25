@@ -38,7 +38,7 @@
         cluster: "Nouveau cluster"
         datacenter: "Datacenter"
         state: present
-        template: "Windows-11-Template "
+        template: "Windows-11-Template"
         name: "Client{{ vminfo.virtual_machines | length + 1 }}"
         networks:
           - name: "DPortGroup 1"
