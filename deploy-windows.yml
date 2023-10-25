@@ -35,10 +35,10 @@
         password: "{{ vcenter_password }}"
         validate_certs: false
         folder: "/"
-        cluster: "Nouveau cluster"
+        cluster: "Nouveau cluster 1"
         datacenter: "Datacenter"
         state: present
-        template: "Ubuntu-Desktop-Template"
+        template: "-Template"
         name: "Client{{ vminfo.virtual_machines | length + 1 }}"
         networks:
           - name: "DPortGroup 1"

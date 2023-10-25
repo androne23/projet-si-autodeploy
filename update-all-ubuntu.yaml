@@ -1,0 +1,18 @@
+---
+- name: Update all Ubuntu
+  hosts: localhost
+  gather_facts: no
+  vars:
+    pip_package_requirements:
+  tasks:
+    - name: Install pip requests library
+      delegate_to: localhost
+      pip:
+        name: "{{ item }}"
+        state: present
+      with_items: "{{ pip_package_requirements }}"
+    - name: Install all updates and reboot as many times as needed
+      ansible.builtin.command: sshpass -p Test1324$ ssh ubuntu@10.0.0.38 'sudo apt update && sudo apt upgrade -y'
+      register: updatessh
+      failed_when: updatessh.rc != updatessh.rc
+      delegate_to: localhost
